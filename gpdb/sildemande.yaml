@@ -244,9 +244,9 @@ RABBITMQ:
 
           CASE WHEN ((j->>'payload')::json->>'op')='d'
 
-            THEN ((j->>'payload')::json->>'before')::json->>'saisieDate'
+            THEN CAST(((j->>'payload')::json->>'before')::json->>'saisieDate' AS DATE)
 
-            ELSE ((j->>'payload')::json->>'after')::json->>'saisieDate'
+            ELSE CAST(((j->>'payload')::json->>'after')::json->>'saisieDate' AS DATE)
 
           END
 
@@ -260,9 +260,9 @@ RABBITMQ:
 
           CASE WHEN ((j->>'payload')::json->>'op')='d'
 
-            THEN ((j->>'payload')::json->>'before')::json->>'saisieHeure'
+            THEN CAST(((j->>'payload')::json->>'before')::json->>'saisieHeure' AS TIME)
 
-            ELSE ((j->>'payload')::json->>'after')::json->>'saisieHeure'
+            ELSE CAST(((j->>'payload')::json->>'after')::json->>'saisieHeure' AS TIME)
 
           END
 
@@ -292,9 +292,9 @@ RABBITMQ:
 
           CASE WHEN ((j->>'payload')::json->>'op')='d'
 
-            THEN ((j->>'payload')::json->>'before')::json->>'demandeDate'
+            THEN CAST(((j->>'payload')::json->>'before')::json->>'demandeDate' AS DATE)
 
-            ELSE ((j->>'payload')::json->>'after')::json->>'demandeDate'
+            ELSE CAST(((j->>'payload')::json->>'after')::json->>'demandeDate' AS DATE)
 
           END
 
@@ -302,15 +302,15 @@ RABBITMQ:
 
 
 
-      - NAME: validatedate
+      - NAME: validedate
 
         EXPRESSION: |
 
           CASE WHEN ((j->>'payload')::json->>'op')='d'
 
-            THEN ((j->>'payload')::json->>'before')::json->>'validateDate'
+            THEN CAST(((j->>'payload')::json->>'before')::json->>'valideDate' AS DATE)
 
-            ELSE ((j->>'payload')::json->>'after')::json->>'validateDate'
+            ELSE CAST(((j->>'payload')::json->>'after')::json->>'valideDate' AS DATE)
 
           END
 
@@ -324,9 +324,9 @@ RABBITMQ:
 
           CASE WHEN ((j->>'payload')::json->>'op')='d'
 
-            THEN ((j->>'payload')::json->>'before')::json->>'valideHeure'
+            THEN CAST(((j->>'payload')::json->>'before')::json->>'valideHeure' AS TIME)
 
-            ELSE ((j->>'payload')::json->>'after')::json->>'valideHeure'
+            ELSE CAST(((j->>'payload')::json->>'after')::json->>'valideHeure' AS TIME)
 
           END
 
@@ -362,15 +362,15 @@ RABBITMQ:
 
 
 
-      - NAME: demandearchivedate
+      - NAME: demandedatearchive
 
         EXPRESSION: |
 
           CASE WHEN ((j->>'payload')::json->>'op')='d'
 
-            THEN ((j->>'payload')::json->>'before')::json->>'demandeArchiveDate'
+            THEN CAST(((j->>'payload')::json->>'before')::json->>'demandeArchiveDate' AS DATE)
 
-            ELSE ((j->>'payload')::json->>'after')::json->>'demandeArchiveDate'
+            ELSE CAST(((j->>'payload')::json->>'after')::json->>'demandeArchiveDate' AS DATE)
 
           END
 
@@ -416,9 +416,9 @@ RABBITMQ:
 
           CASE WHEN ((j->>'payload')::json->>'op')='d'
 
-            THEN ((j->>'payload')::json->>'before')::json->>'dateButoire'
+            THEN CAST(((j->>'payload')::json->>'before')::json->>'dateButoire' AS DATE)
 
-            ELSE ((j->>'payload')::json->>'after')::json->>'dateButoire'
+            ELSE CAST(((j->>'payload')::json->>'after')::json->>'dateButoire' AS DATE)
 
           END
 
@@ -448,9 +448,9 @@ RABBITMQ:
 
           CASE WHEN ((j->>'payload')::json->>'op')='d'
 
-            THEN ((j->>'payload')::json->>'before')::json->>'ordonnanceDate'
+            THEN CAST(((j->>'payload')::json->>'before')::json->>'ordonnanceDate' AS DATE)
 
-            ELSE ((j->>'payload')::json->>'after')::json->>'ordonnanceDate'
+            ELSE CAST(((j->>'payload')::json->>'after')::json->>'ordonnanceDate' AS DATE)
 
           END
 
@@ -464,9 +464,9 @@ RABBITMQ:
 
           CASE WHEN ((j->>'payload')::json->>'op')='d'
 
-            THEN ((j->>'payload')::json->>'before')::json->>'codeBeneficiaire'
+            THEN CAST(((j->>'payload')::json->>'before')::json->>'codeBeneficiaire' AS INT)
 
-            ELSE ((j->>'payload')::json->>'after')::json->>'codeBeneficiaire'
+            ELSE CAST(((j->>'payload')::json->>'after')::json->>'codeBeneficiaire' AS INT)
 
           END
 
@@ -576,9 +576,9 @@ RABBITMQ:
 
           CASE WHEN ((j->>'payload')::json->>'op')='d'
 
-            THEN ((j->>'payload')::json->>'before')::json->>'accidentTravailDate'
+            THEN CAST(((j->>'payload')::json->>'before')::json->>'accidentTravailDate' AS DATE)
 
-            ELSE ((j->>'payload')::json->>'after')::json->>'accidentTravailDate'
+            ELSE CAST(((j->>'payload')::json->>'after')::json->>'accidentTravailDate' AS DATE)
 
           END
 
@@ -608,9 +608,9 @@ RABBITMQ:
 
           CASE WHEN ((j->>'payload')::json->>'op')='d'
 
-            THEN ((j->>'payload')::json->>'before')::json->>'accidentCommunDate'
+            THEN CAST(((j->>'payload')::json->>'before')::json->>'accidentCommunDate' AS DATE)
 
-            ELSE ((j->>'payload')::json->>'after')::json->>'accidentCommunDate'
+            ELSE CAST(((j->>'payload')::json->>'after')::json->>'accidentCommunDate' AS DATE)
 
           END
 
