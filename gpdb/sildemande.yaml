@@ -68,248 +68,173 @@ RABBITMQ:
 
       - NAME: saisietype
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'saisieType' ELSE ((j->>'payload')::json->>'after')::json->>'saisieType' END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'saisietype' ELSE ((j->>'payload')::json->>'after')::json->>'saisietype' END
 
       - NAME: saisiedate
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'saisieDate' AS DATE) ELSE CAST(((j->>'payload')::json->>'after')::json->>'saisieDate' AS DATE) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'saisiedate' ELSE ((j->>'payload')::json->>'after')::json->>'saisiedate' END
 
       - NAME: saisieheure
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'saisieHeure' AS TIME) ELSE CAST(((j->>'payload')::json->>'after')::json->>'saisieHeure' AS TIME) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'saisieheure' ELSE ((j->>'payload')::json->>'after')::json->>'saisieheure' END
 
       - NAME: saisiepar
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'saisiePar' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'saisiePar' AS INT) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'saisiepar' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'saisiepar' AS INT) END
 
       - NAME: demandedate
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'demandeDate' AS DATE) ELSE CAST(((j->>'payload')::json->>'after')::json->>'demandeDate' AS DATE) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'demandedate' ELSE ((j->>'payload')::json->>'after')::json->>'demandedate' END
 
       - NAME: validedate
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'valideDate' AS DATE) ELSE CAST(((j->>'payload')::json->>'after')::json->>'valideDate' AS DATE) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'validedate' ELSE ((j->>'payload')::json->>'after')::json->>'validedate' END
 
       - NAME: valideheure
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'valideHeure' AS TIME) ELSE CAST(((j->>'payload')::json->>'after')::json->>'valideHeure' AS TIME) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'valideheure' ELSE ((j->>'payload')::json->>'after')::json->>'valideheure' END
 
       - NAME: validepar
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'validePar' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'validePar' AS INT) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'validepar' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'validepar' AS INT) END
 
       - NAME: valideauto
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'valideAuto' AS SMALLINT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'valideAuto' AS SMALLINT) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'valideauto' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'valideauto' AS INT) END
 
       - NAME: demandedatearchive
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'demandeArchiveDate' AS DATE) ELSE CAST(((j->>'payload')::json->>'after')::json->>'demandeArchiveDate' AS DATE) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'demandedatearchive' ELSE ((j->>'payload')::json->>'after')::json->>'demandedatearchive' END
 
       - NAME: urgent
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'urgent' AS SMALLINT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'urgent' AS SMALLINT) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'urgent' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'urgent' AS INT) END
 
       - NAME: gratuit
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'gratuit' AS SMALLINT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'gratuit' AS SMALLINT) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'gratuit' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'gratuit' AS INT) END
 
       - NAME: datebutoire
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'dateButoire' AS DATE) ELSE CAST(((j->>'payload')::json->>'after')::json->>'dateButoire' AS DATE) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'datebutoire' ELSE ((j->>'payload')::json->>'after')::json->>'datebutoire' END
 
       - NAME: majdossierpatient
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'majDossierPatient' AS SMALLINT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'majDossierPatient' AS SMALLINT) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'majdossierpatient' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'majdossierpatient' AS INT) END
 
       - NAME: ordonnancedate
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'ordonnanceDate' AS DATE) ELSE CAST(((j->>'payload')::json->>'after')::json->>'ordonnanceDate' AS DATE) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'ordonnancedate' ELSE ((j->>'payload')::json->>'after')::json->>'ordonnancedate' END
 
       - NAME: codebeneficiaire
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'codeBeneficiaire' AS SMALLINT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'codeBeneficiaire' AS SMALLINT) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'codebeneficiaire' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'codebeneficiaire' AS INT) END
 
       - NAME: codeexoneration
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'codeExoneration' ELSE ((j->>'payload')::json->>'after')::json->>'codeExoneration' END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'codeexoneration' ELSE ((j->>'payload')::json->>'after')::json->>'codeexoneration' END
 
       - NAME: codecouverture
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'codeCouverture' ELSE ((j->>'payload')::json->>'after')::json->>'codeCouverture' END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'codecouverture' ELSE ((j->>'payload')::json->>'after')::json->>'codecouverture' END
 
       - NAME: assurancenature
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'assuranceNature' AS SMALLINT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'assuranceNature' AS SMALLINT) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'assurancenature' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'assurancenature' AS INT) END
 
       - NAME: accidenttravailregime
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'accidentTravailRegime' ELSE ((j->>'payload')::json->>'after')::json->>'accidentTravailRegime' END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'accidenttravailregime' ELSE ((j->>'payload')::json->>'after')::json->>'accidenttravailregime' END
 
       - NAME: accidenttravailnumero
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'accidentTravailNumero' ELSE ((j->>'payload')::json->>'after')::json->>'accidentTravailNumero' END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'accidenttravailnumero' ELSE ((j->>'payload')::json->>'after')::json->>'accidenttravailnumero' END
 
       - NAME: accidenttravailsupport
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'accidentTravailSupport' AS SMALLINT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'accidentTravailSupport' AS SMALLINT) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'accidenttravailsupport' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'accidenttravailsupport' AS INT) END
 
       - NAME: accidenttravaildate
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'accidentTravailDate' AS DATE) ELSE CAST(((j->>'payload')::json->>'after')::json->>'accidentTravailDate' AS DATE) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'accidenttravaildate' ELSE ((j->>'payload')::json->>'after')::json->>'accidenttravaildate' END
 
       - NAME: accidentcommun
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'accidentCommun' AS SMALLINT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'accidentCommun' AS SMALLINT) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'accidentcommun' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'accidentcommun' AS INT) END
 
       - NAME: accidentcommundate
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'accidentCommunDate' AS DATE) ELSE CAST(((j->>'payload')::json->>'after')::json->>'accidentCommunDate' AS DATE) END
-      - NAME: factureStatus
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'accidentcommundate' ELSE ((j->>'payload')::json->>'after')::json->>'accidentcommundate' END
+      - NAME: facturestatus
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'facturestatus' ELSE ((j->>'payload')::json->>'after')->>'facturestatus' END
+      - NAME: idtarif
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'factureStatus' ELSE ((j->>'payload')::json->>'after')::json->>'factureStatus' END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'idtarif' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'idtarif' AS INT) END
 
+      - NAME: sesamvitale
 
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'sesamvitale' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'sesamvitale' AS INT) END
 
+      - NAME: numerologicmax
 
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'numerologicmax' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'numerologicmax' AS INT) END
 
-      - NAME: idTarif
+      - NAME: statusfse
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'idTarif' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'idTarif' AS INT) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'statusfse' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'statusfse' AS INT) END
 
+      - NAME: datepromesse
 
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'datepromesse' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'datepromesse' AS INT) END
 
+      - NAME: compterendunbrinitial
 
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'compterendunbrinitial' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'compterendunbrinitial' AS INT) END
 
-      - NAME: sesamVitale
+      - NAME: compterendunbr
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'sesamVitale' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'sesamVitale' AS INT) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'compterendunbr' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'compterendunbr' AS INT) END
 
+      - NAME: compterendunbreffectue
 
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'compterendunbreffectue' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'compterendunbreffectue' AS INT) END
 
+      - NAME: motclef
 
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'motclef' ELSE ((j->>'payload')::json->>'after')::json->>'motclef' END
 
-      - NAME: numeroLogicmax
+      - NAME: cacheanteriorite
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'numeroLogicmax' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'numeroLogicmax' AS INT) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'cacheanteriorite' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'cacheanteriorite' AS INT) END
 
+      - NAME: valab
 
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'valab' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'valab' AS INT) END
 
+      - NAME: origineprescription
 
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'origineprescription' ELSE ((j->>'payload')::json->>'after')::json->>'origineprescription' END
 
-      - NAME: statusFSE
+      - NAME: medecintraitant
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'statusFSE' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'statusFSE' AS INT) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'medecintraitant' ELSE ((j->>'payload')::json->>'after')::json->>'medecintraitant' END
 
+      - NAME: infosup
 
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'infosup' ELSE ((j->>'payload')::json->>'after')::json->>'infosup' END
 
+      - NAME: saisieparvitale
 
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'saisieparvitale' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'saisieparvitale' AS INT) END
 
-      - NAME: datePromesse
+      - NAME: idtuteur
 
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'datePromesse' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'datePromesse' AS INT) END
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'idtuteur' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'idtuteur' AS INT) END
 
+      - NAME: garde
 
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'garde' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'garde' AS INT) END
 
+      - NAME: critique
 
-
-      - NAME: compteRenduNbrInitial
-
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'compteRenduNbrInitial' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'compteRenduNbrInitial' AS INT) END
-
-
-
-
-
-      - NAME: compteRenduNbr
-
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'compteRenduNbr' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'compteRenduNbr' AS INT) END
-
-
-
-
-
-      - NAME: compteRenduNbrEffectue
-
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'compteRenduNbrEffectue' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'compteRenduNbrEffectue' AS INT) END
-
-
-
-
-
-      - NAME: motClef
-
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'motClef' ELSE ((j->>'payload')::json->>'after')::json->>'motClef' END
-
-
-
-
-
-      - NAME: cacheAnteriorite
-
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'cacheAnteriorite' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'cacheAnteriorite' AS INT) END
-
-
-
-
-
-      - NAME: valab
-
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'valab' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'valab' AS INT) END
-
-
-
-
-
-      - NAME: originePrescription
-
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'originePrescription' ELSE ((j->>'payload')::json->>'after')::json->>'originePrescription' END
-
-
-
-
-
-      - NAME: medecinTraitant
-
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'medecinTraitant' ELSE ((j->>'payload')::json->>'after')::json->>'medecinTraitant' END
-
-
-
-
-
-      - NAME: infoSup
-
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'infoSup' ELSE ((j->>'payload')::json->>'after')::json->>'infoSup' END
-
-
-
-
-
-      - NAME: saisieParVitale
-
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'saisieParVitale' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'saisieParVitale' AS INT) END
-
-
-
-
-
-      - NAME: idTuteur
-
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'idTuteur' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'idTuteur' AS INT) END
-
-
-
-
-
-      - NAME: garde
-
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'garde' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'garde' AS INT) END
-
-
-
-
-
-      - NAME: critique
-
-        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload
-
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'critique' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'critique' AS INT) END
