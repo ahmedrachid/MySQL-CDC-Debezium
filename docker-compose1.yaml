@@ -1,12 +1,30 @@
 version: "3.9"
 services:
+  mysql:
+    image: mysql:latest
+    restart: always
+    container_name: mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=mysql
+      - MYSQL_ROOT_PASSWORD=mysql
+    healthcheck:
+      test: mysqladmin ping -h localhost -P 3306 -u root --password=mysql
+      interval: 2s
+      timeout: 20s
+      retries: 10
   mysqlsetup:
     image: mysql:latest
     container_name: mysqlsetup
+    depends_on:
+      mysql:
+        condition: service_healthy
     restart: "no"
     environment:
       BINLOG_FORMAT: ROW
-    entrypoint: [ "bash", "-c" , "mysql --host 10.213.19.1 --port=3306 --user=greenplumpoc --password=D3b3z*um -e 'USE kalilab; SELECT * from silNumTubeLien limit 10;';"]
+    entrypoint: [ "bash", "-c" , "sleep 20 && mysql --host mysql --port=3306 --user=root --password=mysql -e 'SET GLOBAL binlog_format=ROW;'; mysql --host=mysql --port=3306 --user=root --password=mysql -e 'create database test;'; mysql --host=mysql --port=3306 --user=root --password=mysql --database=test -e 'create table customers(id int, name varchar(100))'"]
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
@@ -34,6 +52,8 @@ services:
     volumes:
       - ./conf:/debezium/conf
     depends_on:
+      mysql:
+        condition: service_healthy
       rabbitmq:
         condition: service_healthy
   gpdb:
