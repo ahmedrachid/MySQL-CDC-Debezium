@@ -1,0 +1,36 @@
+DATABASE: postgres
+USER: gpadmin
+HOST: localhost
+PORT: 5432
+VERSION: 2
+RABBITMQ:
+  INPUT:
+    SOURCE:
+      SERVER: guest:guest@rabbitmq:5672
+      QUEUE: test
+      VIRTUALHOST: /
+    DATA:
+      COLUMNS:
+        - NAME: j
+          TYPE: json
+      FORMAT: json
+    FILTER: (((j::json->>'payload')::json->>'source')::json->>'table')::text = 'silNumTubeLien'
+  OUTPUT:
+    TABLE: silnumtubelien
+    MODE: MERGE
+    MATCH_COLUMNS:
+      - id
+    DELETE_CONDITION: ((j->>'payload')::json->>'op')='d'
+    MAPPING:
+      - NAME: id
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'id' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'id' AS INT) END
+      - NAME: idtube
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'idTube' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'idTube' AS INT) END
+      - NAME: idtype
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN ((j->>'payload')::json->>'before')::json->>'idType' ELSE ((j->>'payload')::json->>'after')::json->>'idType' END
+      - NAME: idreference
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'idReference' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'idReference' AS INT) END
+      - NAME: iddemande
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'idDemande' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'idDemande' AS INT) END
+      - NAME: envoi
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'envoi' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'envoi' AS INT) END
