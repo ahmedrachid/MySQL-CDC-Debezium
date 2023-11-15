@@ -1,0 +1,42 @@
+DATABASE: postgres
+USER: gpadmin
+HOST: localhost
+PORT: 5432
+VERSION: 2
+RABBITMQ:
+  INPUT:
+    SOURCE:
+      SERVER: guest:guest@rabbitmq:5672
+      QUEUE: test
+      VIRTUALHOST: /
+    DATA:
+      COLUMNS:
+        - NAME: j
+          TYPE: json
+      FORMAT: json
+    FILTER: (((j::json->>'payload')::json->>'source')::json->>'table')::text = 'silNumTube'
+  OUTPUT:
+    TABLE: silnumtube
+    MODE: MERGE
+    MATCH_COLUMNS:
+      - id
+    DELETE_CONDITION: ((j->>'payload')::json->>'op')='d'
+    MAPPING:
+      - NAME: id
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'id' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'id' AS INT) END
+      - NAME: numtube
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'numTube' AS TEXT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'numTube' AS TEXT) END
+      - NAME: codeliquide
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'codeLiquide' AS TEXT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'codeLiquide' AS TEXT) END
+      - NAME: codetube
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'codeTube' AS TEXT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'codeTube' AS TEXT) END
+      - NAME: idetiquette
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'idEtiquette' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'idEtiquette' AS INT) END
+      - NAME: iddemande
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'idDemande' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'idDemande' AS INT) END
+      - NAME: envoi
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'envoi' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'envoi' AS INT) END
+      - NAME: increment
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'increment' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'increment' AS INT) END
+      - NAME: archive
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'archive' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'archive' AS INT) END
