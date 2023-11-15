@@ -1,0 +1,54 @@
+DATABASE: postgres
+USER: gpadmin
+HOST: localhost
+PORT: 5432
+VERSION: 2
+RABBITMQ:
+  INPUT:
+    SOURCE:
+      SERVER: guest:guest@rabbitmq:5672
+      QUEUE: test
+      VIRTUALHOST: /
+    DATA:
+      COLUMNS:
+        - NAME: j
+          TYPE: json
+      FORMAT: json
+    FILTER: (((j::json->>'payload')::json->>'source')::json->>'table')::text = 'silDemandeAnalyse'
+  OUTPUT:
+    TABLE: sildemandeanalyse
+    MODE: MERGE
+    MATCH_COLUMNS:
+      - id
+    DELETE_CONDITION: ((j->>'payload')::json->>'op')='d'
+    MAPPING:
+      - NAME: id
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'id' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'id' AS INT) END
+      - NAME: iddemande
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'idDemande' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'idDemande' AS INT) END
+      - NAME: idanalyse
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'idAnalyse' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'idAnalyse' AS INT) END        
+      - NAME: idsiteanalyse
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'idSiteAnalyse' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'idSiteAnalyse' AS INT) END        
+      - NAME: iddemandeprelevement
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'idDemandePrelevement' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'idDemandePrelevement' AS INT) END
+      - NAME: urgent
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'urgent' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'urgent' AS INT) END
+      - NAME: manquant
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'manquant' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'manquant' AS INT) END
+      - NAME: transmis
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'transmis' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'transmis' AS INT) END
+      - NAME: informationsouhaitee
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'informationSouhaitee' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'informationSouhaitee' AS INT) END       
+      - NAME: idcorrespondant
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'idCorrespondant' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'idCorrespondant' AS INT) END       
+      - NAME: referencenomenclature
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'referenceNomenclature' AS TEXT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'referenceNomenclature' AS TEXT) END
+      - NAME: clef
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'clef' AS TEXT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'clef' AS TEXT) END
+      - NAME: facturation
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'facturation' AS TEXT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'facturation' AS TEXT) END        
+      - NAME: saisiedate
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'saisieDate' AS DATE) ELSE CAST(((j->>'payload')::json->>'after')::json->>'saisieDate' AS DATE) END        
+      - NAME: coefficient
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'coefficient' AS numeric(8,2)) ELSE CAST(((j->>'payload')::json->>'after')::json->>'coefficient' AS numeric(8,2)) END
