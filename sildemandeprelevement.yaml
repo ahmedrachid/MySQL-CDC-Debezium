@@ -1,0 +1,80 @@
+DATABASE: postgres
+USER: gpadmin
+HOST: localhost
+PORT: 5432
+VERSION: 2
+RABBITMQ:
+  INPUT:
+    SOURCE:
+      SERVER: guest:guest@rabbitmq:5672
+      QUEUE: test
+      VIRTUALHOST: /
+    DATA:
+      COLUMNS:
+        - NAME: j
+          TYPE: json
+      FORMAT: json
+    FILTER: (((j::json->>'payload')::json->>'source')::json->>'table')::text = 'silDemandePrelevement'
+  OUTPUT:
+    TABLE: sildemandeprelevement
+    MODE: MERGE
+    MATCH_COLUMNS:
+      - id
+    DELETE_CONDITION: ((j->>'payload')::json->>'op')='d'
+    MAPPING:
+      - NAME: id
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'id' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'id' AS INT) END
+      - NAME: iddemande
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'idDemande' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'idDemande' AS INT) END
+      - NAME: prelevepar
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'prelevePar' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'prelevePar' AS INT) END
+      - NAME: idprelevement
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'idPrelevement' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'idPrelevement' AS INT) END
+      - NAME: seance
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'seance' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'seance' AS INT) END
+      - NAME: prelevementdomicile
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'prelevementDomicile' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'prelevementDomicile' AS INT) END
+      - NAME: prelevementmau
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'prelevementMAU' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'prelevementMAU' AS INT) END
+      - NAME: prelevementdeplacement
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'prelevementDeplacement' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'prelevementDeplacement' AS INT) END
+      - NAME: idetiqueteur
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'idEtiqueteur' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'idEtiqueteur' AS INT) END
+      - NAME: kalirespreleveur
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'kaliResPreleveur' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'kaliResPreleveur' AS INT) END
+      - NAME: prelevementnuit
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'prelevementNuit' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'prelevementNuit' AS INT) END
+      - NAME: prelevementmie
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'prelevementMIE' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'prelevementMIE' AS INT) END
+      - NAME: prelevementheurerecpt
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'prelevementHeureRecpt' AS TIME) ELSE CAST(((j->>'payload')::json->>'after')::json->>'prelevementHeureRecpt' AS TIME) END
+      - NAME: prelevementdaterecpt
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'prelevementDateRecpt' AS DATE) ELSE CAST(((j->>'payload')::json->>'after')::json->>'prelevementDateRecpt' AS DATE) END
+      - NAME: prelevedate
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'preleveDate' AS DATE) ELSE CAST(((j->>'payload')::json->>'after')::json->>'preleveDate' AS DATE) END
+      - NAME: preleveheure
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'preleveHeure' AS TIME) ELSE CAST(((j->>'payload')::json->>'after')::json->>'preleveHeure' AS TIME) END
+      - NAME: prelevelieu
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'preleveLieu' AS TEXT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'preleveLieu' AS TEXT) END
+      - NAME: clef
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'clef' AS VARCHAR) ELSE CAST(((j->>'payload')::json->>'after')::json->>'clef' AS VARCHAR) END
+      - NAME: coefficient
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'coefficient' AS DOUBLE PRECISION) ELSE CAST(((j->>'payload')::json->>'after')::json->>'coefficient' AS DOUBLE PRECISION) END
+      - NAME: montant
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'montant' AS NUMERIC) ELSE CAST(((j->>'payload')::json->>'after')::json->>'montant' AS NUMERIC) END
+      - NAME: remise
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'remise' AS VARCHAR) ELSE CAST(((j->>'payload')::json->>'after')::json->>'remise' AS VARCHAR) END
+      - NAME: montantdeplacement
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'montantDeplacement' AS NUMERIC) ELSE CAST(((j->>'payload')::json->>'after')::json->>'montantDeplacement' AS NUMERIC) END
+      - NAME: nbrkilometres
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'nbrKilometres' AS NUMERIC) ELSE CAST(((j->>'payload')::json->>'after')::json->>'nbrKilometres' AS NUMERIC) END
+      - NAME: nbrkmnonfranchise
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'nbrKmNonFranchise' AS NUMERIC) ELSE CAST(((j->>'payload')::json->>'after')::json->>'nbrKmNonFranchise' AS NUMERIC) END
+      - NAME: montantkilometres
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'montantKilometres' AS NUMERIC) ELSE CAST(((j->>'payload')::json->>'after')::json->>'montantKilometres' AS NUMERIC) END
+      - NAME: montantprelevementnuit
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'montantPrelevementNuit' AS NUMERIC) ELSE CAST(((j->>'payload')::json->>'after')::json->>'montantPrelevementNuit' AS NUMERIC) END
+      - NAME: prelevementferie
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'prelevementFerie' AS INT) ELSE CAST(((j->>'payload')::json->>'after')::json->>'prelevementFerie' AS INT) END
+      - NAME: montantprelevementferie
+        EXPRESSION: CASE WHEN ((j->>'payload')::json->>'op')='d' THEN CAST(((j->>'payload')::json->>'before')::json->>'montantPrelevementFerie' AS NUMERIC) ELSE CAST(((j->>'payload')::json->>'after')::json->>'montantPrelevementFerie' AS NUMERIC) END
